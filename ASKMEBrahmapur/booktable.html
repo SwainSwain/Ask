@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Table Book</title>
+    <link rel="stylesheet" href="styles_booktable.css">
+</head>
+
+<body>
+    <header>
+        <h1>Restaurant Table Book</h1>
+    </header>
+
+    <section id="search">
+        <label for="restaurant">Choose a restaurant:</label>
+        <select id="restaurant">
+            <option value="restaurant1">Restaurant 1</option>
+            <option value="restaurant2">Restaurant 2</option>
+            <option value="restaurant3">Restaurant 3</option>
+            <option value="restaurant4">Restaurant 4</option>
+            <option value="restaurant5">Restaurant 5</option>
+        </select>
+
+        <label for="date">Select date:</label>
+        <input type="date" id="date">
+
+        <label for="time">Select time:</label>
+        <input type="time" id="time">
+
+        <button onclick="bookTable()">Book Table</button>
+    </section>
+
+    <section id="confirmation">
+        <h2>Booking Confirmation</h2>
+        <p id="confirmation-message"></p>
+    </section>
+
+    <section id="banners">
+        <img src="banner1.jpg" alt="Restaurant 1 Banner">
+        <img src="banner2.jpg" alt="Restaurant 2 Banner">
+        <img src="banner3.jpg" alt="Restaurant 3 Banner">
+        <img src="banner4.jpg" alt="Restaurant 4 Banner">
+        <img src="banner5.jpg" alt="Restaurant 5 Banner">
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

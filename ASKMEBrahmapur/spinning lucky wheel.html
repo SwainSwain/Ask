@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #222;
+      color: #fff;
+    }
+
+    .wheel-container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+    }
+
+    .wheel {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: conic-gradient(
+        #ff5733 0deg 60deg,
+        #33ff57 60deg 120deg,
+        #5733ff 120deg 180deg,
+        #ff5733 180deg 240deg,
+        #33ff57 240deg 300deg,
+        #5733ff 300deg 360deg
+      );
+      animation: spin 5s cubic-bezier(0.17, 0.67, 0.83, 0.67) infinite;
+      transform-origin: 50% 50%;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(90deg);
+      width: 20px;
+      height: 100px;
+      background-color: #fff;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      z-index: 2;
+    }
+
+    .prize {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      font-size: 16px;
+      z-index: 3;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .prize-1 { transform: rotate(30deg) translateY(-120px); }
+    .prize-2 { transform: rotate(90deg) translateY(-120px); }
+    .prize-3 { transform: rotate(150deg) translateY(-120px); }
+    .prize-4 { transform: rotate(210deg) translateY(-120px); }
+    .prize-5 { transform: rotate(270deg) translateY(-120px); }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wheel-container">
+  <div class="arrow"></div>
+  <div class="wheel">
+    <div class="prize prize-1">$10</div>
+    <div class="prize prize-2">You get a gift</div>
+    <div class="prize prize-3">You won a free shopping option</div>
+    <div class="prize prize-4">You won a box</div>
+  </div>
+</div>
+
+<script>
+  const wheel = document.querySelector('.wheel');
+  const arrow = document.querySelector('.arrow');
+
+  setTimeout(() => {
+    stopWheel();
+  }, 5000);
+
+  function stopWheel() {
+    // Stop the wheel spin
+    wheel.style.animation = 'none';
+
+    // Get the rotation angle of the arrow
+    const transformValue = window.getComputedStyle(arrow).getPropertyValue('transform');
+    const matrix = new DOMMatrix(transformValue);
+    const rotation = Math.round((Math.atan2(matrix.b, matrix.a) * (180 / Math.PI) + 360) % 360);
+
+    // Determine the prize based on the rotation angle
+    let prize;
+    if (rotation >= 0 && rotation < 60) {
+      prize = '$10';
+    } else if (rotation >= 60 && rotation < 120) {
+      prize = 'You get a gift';
+    } else if (rotation >= 120 && rotation < 180) {
+      prize = 'You won a free shopping option';
+    } else if (rotation >= 180 && rotation < 240) {
+      prize = 'You won a box';
+    } else {
+      prize = 'No prize'; // Default prize
+    }
+
+    // Show a message to the user
+    alert(`Congratulations! ${prize}`);
+  }
+</script>
+
+</body>
+</html>
